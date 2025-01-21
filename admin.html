@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- SEO -->
+  <title>
+    ADMIN TOOL
+  </title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>
+      ADMIN TOOL
+    </h1>
+
+    <h2>
+      Remove tweets
+    </h2>
+
+    <form id="formToRemoveTweet">
+
+      <label>ThumbnailUrl</label>
+      <input id="inputThumbnailUrl" type="text" minlength="10">
+
+      <label>
+        password
+        <input id="inputPassword" type="password" required minlength="10">
+      </label>
+
+      <button type="submit">提出する</button>
+    </form>
+  </div>
+
+  <script src="admin-main.js"></script>
+</body>
+
+</html>

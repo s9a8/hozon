@@ -1,0 +1,129 @@
+<div
+  style="display: none;width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; background-color: #424242; z-index: 2147483647;"
+  id="video_inst_area">
+  <div id="loading"
+    style="position: absolute;width: 100%;height: 50px;line-height: 50px;font-size: 5vw;color: white;font-weight: bold;text-align: center;top: 0px;bottom: 0px;left: 0px;right: 0px;margin: auto;">
+    動画準備中</div>
+  <div id="bnc_ad_13219" class="videoAd"
+    style="width: 300px;height: 250px;position: absolute;top: 0px;bottom: 0px;left: 0px;right: 0px;margin: auto;z-index: 100;">
+    <span id="rewardAdClose" role="button"
+      style="display:none;width:16px;height:16px;line-height:16px;position: absolute;right: 0px;top: -20px;z-index: 2147483647;"><svg
+        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16" style="vertical-align:bottom;">
+        <g>
+          <polygon
+            points="512,52.535 459.467,0.002 256.002,203.462 52.538,0.002 0,52.535 203.47,256.005 0,459.465 52.533,511.998 256.002,308.527 459.467,511.998 512,459.475 308.536,256.005"
+            style="fill:#fff;stroke:#fff;stroke-width:10px;"></polygon>
+        </g>
+      </svg></span>
+  </div>
+</div>
+<style>
+  #interstitialAd {
+    position: fixed;
+    z-index: 2147483647;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
+  }
+
+  #closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+
+  #adSourceCode {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .orp-player-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+</style>
+<div id="interstitialAd">
+  <span id="closeButton">×</span>
+  <div id="adSourceCode">
+    <img src="https://ratel-ad.com/./file/box/fhq8rdzvmfux.png" width="300" height="250" alt="Ad Image">
+  </div>
+</div>
+<script type="text/javascript">
+  (function (window, document) {
+    if (/vRewardStatus=isUnlimited/.test(document.cookie)) return;
+    var btnTimer = true;
+    var btnSec = 10;
+    var rewardClose = document.getElementById('rewardAdClose');
+    document.getElementById('interstitialAd').style.zIndex = '2147483647';
+    window.addEventListener('load', function () {
+      var itemInnerElements = document.querySelectorAll('.tweet-thumbnail');
+      var interstitialAd = document.getElementById('interstitialAd');
+      var closeButton = document.getElementById('closeButton');
+      var videoInstArea = document.getElementById('video_inst_area');
+      function showInterstitialAd() {
+        interstitialAd.style.display = 'block';
+      }
+      function closeInterstitialAd() {
+        interstitialAd.style.display = 'none';
+      }
+      itemInnerElements.forEach(function (element) {
+        element.addEventListener('click', function (event) {
+          if (/vRewardStatus=isUnlimited/.test(document.cookie)) return;
+          event.preventDefault();
+          showInterstitialAd();
+        });
+      });
+      closeButton.addEventListener('click', function () {
+        closeInterstitialAd();
+      });
+      var inst = document.getElementById('adSourceCode');
+      inst.addEventListener('click', function () {
+        var scriptA = document.createElement('script');
+        scriptA.src = 'https://js.ssp.bance.jp/bnctag.js';
+        scriptA.async = true;
+        videoInstArea.appendChild(scriptA);
+        var scriptB = document.createElement('script');
+        scriptB.innerHTML = 'window.bnctag=window.bnctag||{cmd:[]};bnctag.cmd.push(function(){bnctag.config({"pid":"774"});bnctag.publish("13219", "bnc_ad_13219");});';
+        videoInstArea.appendChild(scriptB);
+        interstitialAd.style.display = 'none';
+        videoInstArea.style.display = 'block';
+        setTimeout(function () {
+          var adFrame = videoInstArea.getElementsByTagName('iframe')[0];
+          var observer = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+              if (mutation.removedNodes && mutation.removedNodes.length > 0) {
+                for (var i = 0; i < mutation.removedNodes.length; i++) {
+                  var removedNode = mutation.removedNodes[i];
+                  if (removedNode.id === 'ad_countdownbnc_vp') {
+                    rewardClose.style.display = 'block';
+                  }
+                }
+              }
+            });
+          });
+          observer.observe(adFrame.contentDocument.body, {
+            childList: true,
+            subtree: true
+          });
+          document.getElementById('loading').style.display = 'none';
+        }, 3000);
+      });
+      rewardClose.addEventListener('click', function () {
+        var t = 1440;
+        var now = new Date();
+        now.setMinutes(now.getMinutes() + t);
+        document.cookie = 'vRewardStatus=isUnlimited;path=/;expires=' + now.toUTCString();
+        videoInstArea.style.display = 'none';
+      });
+    }, false);
+  })(window, document);
+</script>

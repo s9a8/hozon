@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- SEO -->
+  <title>
+    REPORT / 報告
+  </title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
+  <script src="https://js.hcaptcha.com/1/api.js"></script>
+  <style>
+    button {
+      color: white;
+      background-color: red;
+      border: solid 2px yellow;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>
+      REPORT / 報告
+    </h1>
+    <p>
+      コンテンツの問題または問題を報告してください。
+    </p>
+    <p>
+      私たちは違法なコンテンツを許容しません。
+    </p>
+    <p>
+      このページに大量のスパムが投稿されているため、このページが少し使いにくくなってしまったことをお詫び申し上げます。
+      <br>
+      あなたのご協力に感謝します。
+    </p>
+
+    <form action="https://getform.io/f/f497807f-dc92-4e3e-8951-59e6ac17c9a1" method="POST"
+      onsubmit="return validateCaptcha()">
+
+      <p>&nbsp;</p>
+
+      <label>名前（任意） *返信や確認を必要とする場合には必ず入力してください。</label>
+      <input id="name-field" type="text" name="name" onchange="validateName()" minlength="4">
+
+      <p>&nbsp;</p>
+
+      <label>Eメール（任意） *返信か確認を必要とする場合には必ず入力してください。</label>
+      <input id="email-field" type="email" name="email" onchange="validateEmail()" minlength="6">
+      <div><small>確実にメールを配信できるよう、Gmail、Yahoo、Outlook などをご利用ください。</small></div>
+      <div><small>iCloud、au、Docomo、Softbank の電子メール サービスはご利用いただけません。</small></div>
+
+      <p>&nbsp;</p>
+
+      <!-- add hidden Honeypot input to prevent spams -->
+      <input type="hidden" name="_gotcha" style="display:none !important">
+
+      <p>&nbsp;</p>
+
+      <label>
+        Twitter URL (事前入力)
+        <input id="inputTwitterUrl" type="url" name="twitterUrl" required readonly>
+      </label>
+
+      <p>&nbsp;</p>
+
+      <label>
+        コンテンツの当社 Web サイト URL (事前入力)
+        <input id="inputOurWebsiteUrl" type="url" name="ourWebsiteUrl" required readonly>
+      </label>
+
+      <p>&nbsp;</p>
+
+      <label>
+        これはあなたのコンテンツですか？（必須）
+        <input id="inputIsThisYourContent" type="text" name="isThisYourContent" placeholder="はい / いいえ" required>
+      </label>
+
+      <p>&nbsp;</p>
+
+      <fieldset>
+        <legend>報告のタイプ</legend>
+        <label>
+          <input type="checkbox" name="typeOfReport[]" value="child">
+          児童ポルノ
+        </label>
+        <label>
+          <input type="checkbox" name="typeOfReport[]" value="violence">
+          暴力
+        </label>
+        <label>
+          <input type="checkbox" name="typeOfReport[]" value="uncensored">
+          無修正
+        </label>
+        <label>
+          <input type="checkbox" name="typeOfReport[]" value="others">
+          その他（規約違反か各国の法の違反）
+        </label>
+      </fieldset>
+
+      <p>&nbsp;</p>
+
+      <label>
+        説明がさらに必要ならメッセージをどうぞ（任意）
+        <textarea type="text" name="message" minlength="10"></textarea>
+      </label>
+
+      <p>&nbsp;</p>
+
+      <label>
+        あなたがロボットではないことを証明するためにキャプチャを渡します。失敗すると、入力データは届きません。
+        <div>
+          <span class="h-captcha" data-sitekey="8a8fbd3c-c234-4d3c-84ee-80808e2d8cb1"></span>
+        </div>
+      </label>
+
+      <p>&nbsp;</p>
+
+
+      <button type="submit">提出する</button>
+    </form>
+  </div>
+
+  <script>
+    function validateName() {
+      const nameValue = document.getElementById("name-field").value.toLowerCase();
+      const blockList = ["elon", "イーロン"];
+
+      blockList.forEach(blockText => {
+        console.log(`validating name: ${nameValue}`)
+        if (nameValue.includes(blockText)) {
+          alert(`Not allowed. Enter a valid name.`);
+          resetNameValue();
+        }
+      });
+    }
+
+    function validateEmail() {
+      const emailValue = document.getElementById("email-field").value.toLowerCase();
+      const blockList = ["icloud.com", "ezweb.ne.jp", "au.com", "docomo.ne.jp", "softbank", "example", "sample"];
+
+      blockList.forEach(blockText => {
+        console.log(`validating email: ${emailValue}`)
+        if (emailValue.includes(blockText)) {
+          alert(`Not allowed. Enter a valid email address.`);
+          resetEmailValue();
+        }
+      });
+    }
+
+    function resetNameValue() {
+      document.getElementById("name-field").value = "";
+    }
+
+    function resetEmailValue() {
+      document.getElementById("email-field").value = "";
+    }
+
+    function validateCaptcha() {
+      const hcaptchaResponse = hcaptcha.getResponse();
+      console.log("hcaptchaResponse: ", hcaptchaResponse)
+      if (hcaptchaResponse.length == 0) {
+        alert("Please complete the captcha");
+        return false;
+      } else {
+        // hCaptcha is solved, allow the form to submit
+        return true;
+      }
+    }
+
+    // get parameters
+    const currentUrl = new URL(window.location.href);
+    const searchParams = new URLSearchParams(currentUrl.search);
+    const twitterUrl = searchParams.get('twitterUrl');
+    const ourWebsiteUrl = searchParams.get('ourWebsiteUrl');
+    // get input elements
+    let inputTwitterUrl = document.getElementById('inputTwitterUrl');
+    let inputOurWebsiteUrl = document.getElementById('inputOurWebsiteUrl');
+    // set the parameters for input elements
+    if (twitterUrl !== null) {
+      inputTwitterUrl.value = twitterUrl;
+    } else {
+      alert("ERROR. No Twitter URL parameter.")
+    }
+    if (ourWebsiteUrl !== null) {
+      inputOurWebsiteUrl.value = ourWebsiteUrl;
+    } else {
+      alert("ERROR. No Our Website URL parameter.")
+    }
+  </script>
+</body>
+
+</html>

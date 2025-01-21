@@ -1,0 +1,135 @@
+:root {
+  --bg-color: #15202b;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: #eee;
+}
+
+h1,
+h2 {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+p {
+  font-size: 0.8rem;
+}
+img {
+  width: 100%;
+}
+a {
+  color: #1d9bf0;
+  font-weight: bold;
+  word-break: break-all;
+  text-decoration: none !important;
+}
+
+.card {
+  border: none;
+  background: transparent;
+}
+
+.card a {
+  text-decoration: none !important;
+}
+
+.card img {
+  border-radius: 8px;
+  width: 100% !important;
+  /* height はHTML側に書く。高速化のため。 */
+  object-fit: cover;
+}
+.c_detail-card img {
+  max-height: 640px;
+  object-fit: contain;
+}
+
+/* 再生アイコンを真ん中に表示する */
+.c_detail-card {
+  position: relative;
+}
+.c_detail-card .c_play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+i.c_play-icon {
+  font-size: 5rem;
+  color: #1d9bf0;
+}
+
+.btn {
+  font-weight: bold;
+  padding: 8px 16px !important;
+}
+.btn-primary {
+  background-color: #1d9bf0;
+  color: #fff;
+}
+.btn-outline-primary {
+  border-color: #1d9bf0;
+  color: #1d9bf0;
+}
+
+/* カスタムフォント */
+.c_text-very-small {
+  font-size: 0.7rem;
+}
+
+/* カスタムwidth,height */
+.c-min-height {
+  min-height: 260px;
+}
+.c-max-width-height-350 {
+  max-width: 350px;
+}
+.c-min-height-300x100-banner {
+  min-height: 105px;
+}
+
+#like-button,
+#dislike-button {
+  padding: 4px !important;
+}
+
+/* ランキングNav */
+.c-nav-wrapper {
+  background-color: var(--bg-color);
+}
+.c-nav-wrapper .nav {
+  justify-content: center !important;
+}
+.c-nav-wrapper .c-nav-link {
+  padding: 2px 6px !important;
+  margin: 2px 4px !important;
+  border: solid 1px #999 !important;
+  border-radius: 4px;
+  justify-content: center !important;
+  color: #fff;
+}
+
+/* ランキング表示 */
+.c-ranking-text {
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+.c-medal {
+  max-width: 24px;
+}
+.c-duration-text {
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.5); /* 黒背景色でテキストを目立たせます。 */
+  color: #fff; /* 白色のテキスト */
+}
+.c-updated-time {
+  font-size: 0.8rem;
+  color: #eee;
+}
